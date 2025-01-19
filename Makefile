@@ -1,25 +1,38 @@
 CC = cc
-FLAGS = -Wall -Werror -Wextra
-NAME = so_long
+CFLAGS = -Wall -Wextra -Werror
+AR = ar rcs
+RM = rm -f
 
-SRC = so_long.c
+LIBFT = _libft/libft.a
+GNL = _gnl/gnl.a
 
+SRC_PATH = src
+
+SRC = 	src/so_long.c\
+		src/map.c
+		
 OBJ = $(SRC:.c=.o)
 
+NAME= so_long
 
+all: libft gnl $(NAME)
 
-all: $(NAME)
+libft:
+	make -C _libft/
 
-%.o : %.c so_long.h
-	$(CC) $(FLAGS) -c $< -o $@
+gnl:
+	make -C _gnl/
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) -fsanitize=address
+	$(CC) $(GNL) $(LIBFT) $(OBJ) -o $(NAME)
 
+$(SRC_PATH)/%.o: %.c includes/so_long.h
+	$(CC) $(CFLAGS) -c $<
+	
 clean:
-	$(RM) $(OBJ) 
+	make clean -C _libft
+	make clean -C _gnl
+	$(RM) $(OBJ) $(OBJB)
 
 fclean: clean
-	$(RM) $(NAME)
-
-re: fclean all
+	$(RM) $(NAME) $(GNL) $(LIBFT)

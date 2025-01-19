@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 15:42:33 by massrayb          #+#    #+#             */
-/*   Updated: 2024/11/11 05:35:32 by massrayb         ###   ########.fr       */
+/*   Created: 2025/01/19 16:41:40 by massrayb          #+#    #+#             */
+/*   Updated: 2025/01/19 17:19:27 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MAP_H
+#define MAP_H
 
-t_list	*ft_lstlast(t_list *lst)
-{
-	if (lst == NULL)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
+#include "so_long.h"
+
+void init_map(t_game_manager *gm, char *name);
+
+#endif

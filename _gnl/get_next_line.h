@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 14:27:44 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/11 12:09:18 by massrayb         ###   ########.fr       */
+/*   Updated: 2024/12/26 21:44:42 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 10
 # endif
 
 int			get_line_size(char *str);

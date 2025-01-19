@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 10:58:54 by massrayb          #+#    #+#             */
-/*   Updated: 2024/11/09 10:04:49 by massrayb         ###   ########.fr       */
+/*   Created: 2025/01/19 13:32:02 by massrayb          #+#    #+#             */
+/*   Updated: 2025/01/19 21:50:25 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/so_long.h"
+#include "../includes/map.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+int main()
 {
-	size_t	src_i;
-	size_t	dst_len;
-
-	src_i = 0;
-	if (size == 0)
-		return (ft_strlen(src));
-	dst_len = ft_strlen(dst);
-	if (dst_len >= size)
-		return (size + ft_strlen(src));
-	if (src[src_i] && src_i < size - dst_len - 1)
-		ft_strlcpy(dst + dst_len, src, size - dst_len);
-	return (dst_len + ft_strlen(src));
+	t_game_manager gm = (t_game_manager){0};
+	init_map(&gm, "./maps/map.ber");
+	// char **map = gm.map;
+	// while (*map)
+	// 	(ft_putstr_fd(*map, 1), map++);
+	
+	// system("leaks so_long");
+	return 0;
 }
