@@ -6,11 +6,11 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:47:12 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/19 21:50:02 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:11:01 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/map.h"
+#include "../includes/so_long.h"
 
 static void	map_load(t_game_manager *gm,  char *name)
 {
@@ -82,14 +82,14 @@ static void	map_elements_count(t_game_manager *gm,int *p_count,int *c_count,int 
 		x = -1;
 		while (++x < gm->m_width)
 			if (gm->map[y][x] == 'P')
-				((*p_count)++, gm->player_x = x, gm->player_y = y);
+				((*p_count)++, gm->plr_x = x * 32, gm->plr_y = y * 32);
 			else if (gm->map[y][x] == 'E')
 				(*d_count)++;
 			else if (gm->map[y][x] == 'C')
 				(*c_count)++;
 	}
 }
-void	map_validate_path(t_game_manager *gm, int x, int y)
+static void	map_validate_path(t_game_manager *gm, int x, int y)
 {
 
 	if (gm->map[y][x] == '1' || gm->map[y][x] == 's' || gm->map[y][x] == 'e'
@@ -101,8 +101,6 @@ void	map_validate_path(t_game_manager *gm, int x, int y)
 		(gm->map[y][x] = 'e', gm->found_exit++);
 	else if (gm->map[y][x] == 'C')
 		(gm->map[y][x] = 'c', gm->found_coins++);
-	
-	
 	map_validate_path(gm, x + 1, y);
 	map_validate_path(gm, x - 1, y);
 	map_validate_path(gm, x , y + 1);
@@ -123,7 +121,7 @@ void init_map(t_game_manager *gm,char *name)
 	if (p_count != 1 || c_count == 0 || d_count != 1)
 		(ft_putendl_fd("Error: invalid map elements count", 2), exit(-1));
 	gm->coins_count  = c_count;
-	map_validate_path(gm, gm->player_x, gm->player_y);
+	map_validate_path(gm, gm->plr_x / 32, gm->plr_y / 32);
 	if (gm->found_exit == 1)
 		ft_putendl_fd("exit found",1);
 	else
