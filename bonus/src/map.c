@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:47:12 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/22 09:34:34 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/01/22 20:09:23 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	map_validate_shape(t_game_manager *gm)
 	}
 }
 
-static void	map_elements_count(t_game_manager *gm, int *p, int *c, int *d)
+static void	map_elements_count(t_game_manager *gm, t_elements *elements)
 {
 	int	y;
 	int	x;
@@ -79,59 +79,61 @@ static void	map_elements_count(t_game_manager *gm, int *p, int *c, int *d)
 		{
 			if (gm->map[y][x] == 'P')
 			{
-				(*p)++;
-				gm->plr_x = x * 32;
-				gm->plr_y = y * 32;
+				(*elements).p_count++;
+				gm->p_pos.x = x * 32;
+				gm->p_pos.y = y * 32;
 			}
 			else if (gm->map[y][x] == 'E')
-				(*d)++;
+				(*elements).d_count++;
 			else if (gm->map[y][x] == 'C')
-				(*c)++;
+				(*elements).c_count++;
+			else if (gm->map[y][x] == 'T')
+				(*elements).t_count++;
 		}
 	}
 }
 
-static void	map_validate_path(t_game_manager *gm, int x, int y)
+static void	map_validate_path(t_game_manager *gm,t_elements *elements, int x, int y)
 {
 	if (gm->map[y][x] == '1' || gm->map[y][x] == 's' || gm->map[y][x] == 'e'
-		|| gm->map[y][x] == 'c')
+		|| gm->map[y][x] == 'c' || gm->map[y][x] == 't')
 		return ;
 	if (gm->map[y][x] == 'P' || gm->map[y][x] == '0')
 		gm->map[y][x] = 's';
 	else if (gm->map[y][x] == 'E')
 	{
 		gm->map[y][x] = 'e';
-		gm->found_exit++;
+		elements->found_exit++;
 	}
 	else if (gm->map[y][x] == 'C')
 	{
 		gm->map[y][x] = 'c';
-		gm->found_coins++;
+		elements->found_coins++;
 	}
-	map_validate_path(gm, x + 1, y);
-	map_validate_path(gm, x - 1, y);
-	map_validate_path(gm, x, y + 1);
-	map_validate_path(gm, x, y - 1);
+	else if (gm->map[y][x] == 'T')
+		gm->map[y][x] = 't';
+	map_validate_path(gm, elements, x + 1, y);
+	map_validate_path(gm, elements, x - 1, y);
+	map_validate_path(gm, elements, x, y + 1);
+	map_validate_path(gm, elements, x, y - 1);
 }
 
 void	init_map(t_game_manager *gm, char *name)
 {
-	int	p_count;
-	int	c_count;
-	int	d_count;
+	t_elements elements;
 
-	p_count = 0;
-	c_count = 0;
-	d_count = 0;
+	elements = (t_elements){0};
 	map_load(gm, name);
 	map_validate_shape(gm);
-	map_elements_count(gm, &p_count, &c_count, &d_count);
-	if (p_count != 1 || c_count == 0 || d_count != 1)
+	map_elements_count(gm, &elements);
+	if (elements.p_count != 1 || elements.c_count == 0 || 
+	elements.d_count != 1 || elements.t_count == 0)
 		clear_game(gm, "Error: invalid map, map elements are not good\n", -1);
-	gm->coins_count = c_count;
-	map_validate_path(gm, gm->plr_x / 32, gm->plr_y / 32);
-	if (gm->found_exit != 1)
+	gm->coins_count = elements.c_count;
+	map_validate_path(gm, &elements, gm->p_pos.x / 32, gm->p_pos.y / 32);
+	if (elements.found_exit != 1)
 		clear_game(gm, "Error: invalid map, cannot reach the exit\n", -1);
-	if (gm->coins_count != gm->found_coins)
+	if (gm->coins_count != elements.found_coins)
 		clear_game(gm, "Error, invalid map, connot collect all coins\n", -1);
+	enemy_generate_list(gm, elements.t_count);
 }

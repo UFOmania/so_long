@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/19 13:32:02 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/22 11:18:58 by massrayb         ###   ########.fr       */
+/*   Created: 2025/01/22 11:23:47 by massrayb          #+#    #+#             */
+/*   Updated: 2025/01/23 20:58:06 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 static int	read_inputs(int key_code, t_game_manager *gm)
 {
-	if (key_code == 13)
+	if (key_code == 126)
+	{
 		gm->move_dir = 1;
-	else if (key_code == 2)
+		gm->anim_dir = 1;
+	}
+	else if (key_code == 124)
+	{	
 		gm->move_dir = 2;
-	else if (key_code == 1)
+		gm->anim_dir = 2;
+	}
+	else if (key_code == 125)
+	{	
 		gm->move_dir = 3;
-	else if (key_code == 0)
+		gm->anim_dir = 3;
+	}
+	else if (key_code == 123)
+	{	
 		gm->move_dir = 4;
+		gm->anim_dir = 4;
+	}
 	else if (key_code == 53)
 		close_game_event(gm);
 	return (0);
@@ -54,8 +66,8 @@ static void	map_validate_name(char *name)
 
 int	main(int ac, char **av)
 {
-	t_game_manager	gm;
-
+	t_game_manager gm;
+	
 	if (ac != 2)
 		return (ft_putendl_fd("Error: please enter map.ber path only", 2), 1);
 	atexit(f);
@@ -66,6 +78,8 @@ int	main(int ac, char **av)
 	init_sprites(&gm);
 	mlx_key_hook(gm.win, read_inputs, &gm);
 	mlx_hook(gm.win, 17, 0, close_game_event, &gm);
+
+	gm.anim_dir = 2;	
 	mlx_loop_hook(gm.mlx, update, &gm);
 	mlx_loop(gm.mlx);
 	return (0);
