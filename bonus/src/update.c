@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 20:49:21 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/23 19:02:00 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:41:27 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ int	update(t_game_manager *gm)
 	int	y;
 	int	x;
 
-	if (gm->fps == INT_MAX)
-		gm->fps = 0;
 	gm->fps++;
 	move_player(gm);
+	if (gm->fps % 5 == 0)
+		move_enemy(gm);
 	y = -1;
 	while (++y < gm->m_height)
 	{

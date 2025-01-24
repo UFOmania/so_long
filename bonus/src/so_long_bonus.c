@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:23:47 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/23 20:58:06 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:32:28 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,28 @@ static int	read_inputs(int key_code, t_game_manager *gm)
 {
 	if (key_code == 126)
 	{
-		gm->move_dir = 1;
-		gm->anim_dir = 1;
+		gm->move_dir = UP;
+		gm->anim_dir = UP;
 	}
 	else if (key_code == 124)
 	{	
-		gm->move_dir = 2;
-		gm->anim_dir = 2;
+		gm->move_dir = RIGHT;
+		gm->anim_dir = RIGHT;
 	}
 	else if (key_code == 125)
 	{	
-		gm->move_dir = 3;
-		gm->anim_dir = 3;
+		gm->move_dir = DOWN;
+		gm->anim_dir = DOWN;
 	}
 	else if (key_code == 123)
 	{	
-		gm->move_dir = 4;
-		gm->anim_dir = 4;
+		gm->move_dir = LEFT;
+		gm->anim_dir = LEFT;
 	}
 	else if (key_code == 53)
 		close_game_event(gm);
+
+	printf("dir %d, key %d\n", gm->move_dir , key_code);
 	return (0);
 }
 
@@ -50,10 +52,10 @@ static void	init_game(t_game_manager *gm)
 		clear_game(gm, "Error: problem with mlx_new_window()\n", -1);
 }
 
-void	f(void)
-{
-	system("leaks so_long");
-}
+// void	f(void)
+// {
+// 	system("leaks so_long");
+// }
 
 static void	map_validate_name(char *name)
 {
@@ -70,7 +72,7 @@ int	main(int ac, char **av)
 	
 	if (ac != 2)
 		return (ft_putendl_fd("Error: please enter map.ber path only", 2), 1);
-	atexit(f);
+	// atexit(f);
 	gm = (t_game_manager){0};
 	map_validate_name(av[1]);
 	init_map(&gm, av[1]);
@@ -78,7 +80,7 @@ int	main(int ac, char **av)
 	init_sprites(&gm);
 	mlx_key_hook(gm.win, read_inputs, &gm);
 	mlx_hook(gm.win, 17, 0, close_game_event, &gm);
-
+	srand(756786587);
 	gm.anim_dir = 2;	
 	mlx_loop_hook(gm.mlx, update, &gm);
 	mlx_loop(gm.mlx);

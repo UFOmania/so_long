@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:23:08 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/23 18:55:44 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:05:21 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <string.h>
 # include <fcntl.h>
 
+#include <stdio.h>
+
+#define UP 1
+#define DOWN 3
+#define RIGHT 2
+#define LEFT 4
+
 typedef struct	s_vec2
 {
 	int	x;
@@ -31,6 +38,7 @@ typedef struct	s_enemy
 {
 	t_vec2	pos;
 	int		dir;
+	int		delay;
 }				t_enemy;
 
 # define sprite_count 9
@@ -71,5 +79,6 @@ void	init_map(t_game_manager *gm, char *name);
 void	init_sprites(t_game_manager *gm);
 int		update(t_game_manager *gm);
 void	move_player(t_game_manager *gm);
+void	move_enemy(t_game_manager *gm);
 
 #endif
