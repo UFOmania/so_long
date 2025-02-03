@@ -22,8 +22,10 @@ SRCB = 	bonus/src/so_long_bonus.c\
 		bonus/src/map_utils.c\
 		bonus/src/update.c\
 		bonus/src/sprite.c\
+		bonus/src/sprite_utils.c\
 		bonus/src/move.c\
 		bonus/src/clear.c\
+		bonus/src/enemy.c\
 		
 OBJ = $(SRC:.c=.o)
 
@@ -36,7 +38,6 @@ all: libft gnl $(NAME)
 
 bonus: libft gnl $(NAMEB)
 
-
 libft:
 	make -C _libft/
 
@@ -47,7 +48,7 @@ $(NAME): $(OBJ)
 	$(CC) $(GNL) $(LIBFT) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(NAMEB):  $(OBJB)
-	$(CC) $(GNL) $(LIBFT) $(OBJB) -lmlx -framework OpenGL -framework AppKit -o $(NAMEB)
+	$(CC) $(GNL) $(LIBFT) $(OBJB) -lmlx -framework OpenGL -framework AppKit -o $(NAMEB) 
 
 $(SRC_PATH)/%.o: %.c includes/so_long.h
 	$(CC) $(CFLAGS) -c $<
@@ -61,7 +62,6 @@ clean:
 	$(RM) $(OBJ) $(OBJB)
 
 re: fclean all
-
 
 fclean: clean
 	$(RM) $(NAME) $(GNL) $(LIBFT)

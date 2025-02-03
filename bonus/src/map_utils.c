@@ -6,12 +6,12 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:30:39 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/24 15:09:12 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:07:21 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/map.h"
-#include <stdio.h>
+
 void	map_calculate_height(t_game_manager *gm, char *name)
 {
 	int		fd;
@@ -40,7 +40,7 @@ void	enemy_create(t_game_manager *gm, int x, int y, int size)
 		if (gm->enemies == NULL)
 			clear_game(gm, "Error: coudnt allocate mem for enemies list\n", -1);
 		i = -1;
-		while (++i <= size )
+		while (++i <= size)
 			gm->enemies[i] = (t_enemy){0};
 	}
 	i = 0;
@@ -58,10 +58,10 @@ void	enemy_generate_list(t_game_manager *gm, int size)
 	y = 0;
 	while (++y < gm->m_height - 1)
 	{
-		 x = 0;
+		x = 0;
 		while (++x < gm->m_width - 1)
 		{
-			if (gm->map[y][x] == 't')
+			if (gm->map[y][x] == 't' || gm->map[y][x] == 'T')
 				enemy_create(gm, x, y, size);
 		}
 	}

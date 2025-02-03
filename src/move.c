@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:41:43 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/23 18:18:02 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:27:41 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	move_player(t_game_manager *gm)
 	new_x = player_get_new_x(gm);
 	new_y = player_get_new_y(gm);
 	update_anim(gm);
-	if ( check_for_collision(gm, new_x, new_y) == 1 )
+	if (check_for_collision(gm, new_x, new_y) == 1)
 	{
 		gm->plr_x = new_x * 32;
 		gm->plr_y = new_y * 32;

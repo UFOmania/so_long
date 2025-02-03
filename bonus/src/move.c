@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:41:43 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/24 15:37:45 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:10:36 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	check_for_collision(t_game_manager *gm, int x, int y)
 {
 	int	i;
+
 	if (gm->map[y][x] == '1')
 		return (0);
 	else if (gm->map[y][x] == 'c')
@@ -34,7 +35,6 @@ int	check_for_collision(t_game_manager *gm, int x, int y)
 	{
 		if (gm->enemies[i].pos.x == x && gm->enemies[i].pos.y == y)
 			clear_game(gm, "player lost", 0);
-		return (1);
 	}
 	return (1);
 }
@@ -78,8 +78,10 @@ void	move_player(t_game_manager *gm)
 
 	new_x = player_get_new_x(gm);
 	new_y = player_get_new_y(gm);
-	if ( check_for_collision(gm, new_x, new_y) == 1 )
+	if (check_for_collision(gm, new_x, new_y) == 1)
 	{
+		if (gm->move_dir != 0)
+			gm->moves_counter++;
 		gm->p_pos.x = new_x * 32;
 		gm->p_pos.y = new_y * 32;
 	}

@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:23:08 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/24 15:05:21 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:04:25 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,27 @@
 # include <string.h>
 # include <fcntl.h>
 
-#include <stdio.h>
+# define UP 1
+# define DOWN 3
+# define RIGHT 2
+# define LEFT 4
 
-#define UP 1
-#define DOWN 3
-#define RIGHT 2
-#define LEFT 4
-
-typedef struct	s_vec2
+typedef struct s_vec2
 {
 	int	x;
 	int	y;
 }				t_vec2;
 
-
-typedef struct	s_enemy
+typedef struct s_enemy
 {
 	t_vec2	pos;
 	int		dir;
 	int		delay;
 }				t_enemy;
 
-# define sprite_count 9
+# define SPRITE_COUNT 7
 
-typedef struct	s_game_manager
+typedef struct s_game_manager
 {
 	char	**map;
 	t_enemy	*enemies;
@@ -56,11 +53,11 @@ typedef struct	s_game_manager
 	int		collected_coins;
 	int		door_open;
 	void	*plr;
-	void	*plr_l[sprite_count];
-	void	*plr_r[sprite_count];
-	void	*plr_u[sprite_count];
-	void	*plr_d[sprite_count];
-	void	*enemy[sprite_count];
+	void	*plr_l[SPRITE_COUNT];
+	void	*plr_r[SPRITE_COUNT];
+	void	*plr_u[SPRITE_COUNT];
+	void	*plr_d[SPRITE_COUNT];
+	void	*enemy[SPRITE_COUNT];
 	int		anim_dir;
 	int		player_frame;
 	int		enemy_frame;

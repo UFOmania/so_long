@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:50:49 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/23 15:46:45 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:05:52 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,26 @@
 
 static	void	clear_images(t_game_manager *gm)
 {
-	int i;
+	int	i;
+
 	if (gm->coin)
 		mlx_destroy_image(gm->mlx, gm->coin);
 	if (gm->door)
 		mlx_destroy_image(gm->mlx, gm->door);
 	i = -1;
-	if (gm->plr_d[0])
-		while (++i < sprite_count)
+	while (++i < SPRITE_COUNT)
+	{
+		if (gm->plr_d[i])
 			mlx_destroy_image(gm->mlx, gm->plr_d[i]);
-	i = -1;
-	if (gm->plr_u[0])
-		while (++i < sprite_count)
+		if (gm->plr_u[i])
 			mlx_destroy_image(gm->mlx, gm->plr_u[i]);
-	i = -1;
-	if (gm->plr_l[0])
-		while (++i < sprite_count)
+		if (gm->plr_l[i])
 			mlx_destroy_image(gm->mlx, gm->plr_l[i]);
-	i = -1;
-	if (gm->plr_r[0])
-		while (++i < sprite_count)
+		if (gm->plr_r[i])
 			mlx_destroy_image(gm->mlx, gm->plr_r[i]);
+		if (gm->enemy[i])
+			mlx_destroy_image(gm->mlx, gm->enemy[i]);
+	}
 	if (gm->wall)
 		mlx_destroy_image(gm->mlx, gm->wall);
 	if (gm->space)

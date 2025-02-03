@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 20:49:21 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/24 15:41:27 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:25:53 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	put_img(t_game_manager *gm, void *img, int x, int y)
 
 static void	draw_palyer_img(t_game_manager *gm)
 {
-	if (gm->player_frame == sprite_count)
+	if (gm->player_frame == SPRITE_COUNT)
 		gm->player_frame = 0;
 	if (gm->anim_dir == 3)
 		put_img(gm, gm->plr_d[gm->player_frame], gm->p_pos.x, gm->p_pos.y);
@@ -41,41 +41,35 @@ static void	draw_palyer_img(t_game_manager *gm)
 		put_img(gm, gm->plr_r[gm->player_frame], gm->p_pos.x, gm->p_pos.y);
 	else if (gm->anim_dir == 4)
 		put_img(gm, gm->plr_l[gm->player_frame], gm->p_pos.x, gm->p_pos.y);
-	if (gm->fps % 8 == 0)
+	if (gm->fps % 20 == 0)
 		gm->player_frame++;
 }
 
 static void	draw_enemy_img(t_game_manager *gm)
 {
-	int i;
+	int	i;
 
-	if (gm->enemy_frame == sprite_count)
+	if (gm->enemy_frame == SPRITE_COUNT)
 		gm->enemy_frame = 0;
 	i = -1;
 	while (gm->enemies[++i].pos.x != 0)
 	{
-		put_img(gm, gm->enemy[gm->enemy_frame], gm->enemies[i].pos.x * 32, gm->enemies[i].pos.y * 32);
+		put_img(gm, gm->enemy[gm->enemy_frame], gm->enemies[i].pos.x * 32, \
+		gm->enemies[i].pos.y * 32);
 	}
 	if (gm->fps % 5 == 0)
 		gm->enemy_frame++;
 }
 
-static void	door_update(t_game_manager *gm)
-{
-	if (!gm->door_open && gm->collected_coins == gm->coins_count)
-		gm->door_open = 1;
-}
-
-
-
 int	update(t_game_manager *gm)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
+	char	*moves_counter;
 
 	gm->fps++;
 	move_player(gm);
-	if (gm->fps % 5 == 0)
+	if (gm->fps % 20 == 0)
 		move_enemy(gm);
 	y = -1;
 	while (++y < gm->m_height)
@@ -86,6 +80,10 @@ int	update(t_game_manager *gm)
 	}
 	draw_palyer_img(gm);
 	draw_enemy_img(gm);
-	door_update(gm);
+	if (!gm->door_open && gm->collected_coins == gm->coins_count)
+		gm->door_open = 1;
+	moves_counter = ft_itoa(gm->moves_counter);
+	mlx_string_put(gm->mlx, gm->win, 100, 100, 255, moves_counter);
+	free(moves_counter);
 	return (0);
 }
