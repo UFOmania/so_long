@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:26:15 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/22 11:04:14 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:06:42 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_game_manager
 	void	*plr_u;
 	void	*plr_d;
 	void	*space;
-	void	*door;
+	void	*door[2];
 	int		door_open;
 	int		exit_game;
 	int		collected_coins;

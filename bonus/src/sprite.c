@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:16:54 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/03 15:21:56 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:13:37 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,10 @@ static void	sprites_load(t_game_manager *gm)
 	sprite_load_enemy(gm);
 	gm->space = mlx_xpm_file_to_image(gm->mlx, "bonus/sprites/space.xpm", \
 	&tmp, &tmp);
-	gm->door = mlx_xpm_file_to_image(gm->mlx, "bonus/sprites/door.xpm", \
-	&tmp, &tmp);
+	gm->door[0] = mlx_xpm_file_to_image(gm->mlx, \
+	"bonus/sprites/door_close.xpm", &tmp, &tmp);
+	gm->door[1] = mlx_xpm_file_to_image(gm->mlx, \
+	"bonus/sprites/door_open.xpm", &tmp, &tmp);
 }
 
 void	init_sprites(t_game_manager *gm)

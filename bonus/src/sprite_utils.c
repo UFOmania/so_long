@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:16:03 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/03 15:23:25 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:14:19 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	sprites_validate(t_game_manager *gm)
 		clear_game(gm, "Error: coudn't load coin sprite\n", -1);
 	if (gm->space == NULL)
 		clear_game(gm, "Error: coudn't load space sprite\n", -1);
-	if (gm->space == NULL)
+	if (gm->door[0] == NULL || gm->door[1] == NULL)
 		clear_game(gm, "Error: coudn't load door sprite\n", -1);
 	i = -1;
 	while (++i < SPRITE_COUNT)

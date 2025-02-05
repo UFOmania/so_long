@@ -64,4 +64,4 @@ clean:
 re: fclean all
 
 fclean: clean
-	$(RM) $(NAME) $(GNL) $(LIBFT)
+	$(RM) $(NAME) $(NAMEB) $(GNL) $(LIBFT)

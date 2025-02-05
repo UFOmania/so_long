@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:50:49 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/03 15:05:52 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:19:36 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static	void	clear_images(t_game_manager *gm)
 
 	if (gm->coin)
 		mlx_destroy_image(gm->mlx, gm->coin);
-	if (gm->door)
-		mlx_destroy_image(gm->mlx, gm->door);
+	if (gm->door[0])
+		mlx_destroy_image(gm->mlx, gm->door[0]);
+	if (gm->door[1])
+		mlx_destroy_image(gm->mlx, gm->door[1]);
 	i = -1;
 	while (++i < SPRITE_COUNT)
 	{

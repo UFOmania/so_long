@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:16:54 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/22 09:54:10 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:21:33 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ static void	sprites_load(t_game_manager *gm)
 	gm->plr_d = mlx_xpm_file_to_image(gm->mlx, "sprites/player_d.xpm", \
 	&tmp, &tmp);
 	gm->space = mlx_xpm_file_to_image(gm->mlx, "sprites/space.xpm", &tmp, &tmp);
-	gm->door = mlx_xpm_file_to_image(gm->mlx, "sprites/door.xpm", &tmp, &tmp);
+	gm->door[1] = mlx_xpm_file_to_image(gm->mlx, "sprites/door_open.xpm", \
+	&tmp, &tmp);
+	gm->door[0] = mlx_xpm_file_to_image(gm->mlx, "sprites/door_close.xpm", \
+	&tmp, &tmp);
 }
 
 static void	sprites_validate(t_game_manager *gm)
@@ -46,7 +49,7 @@ static void	sprites_validate(t_game_manager *gm)
 		clear_game(gm, "Error: coudn't load player_u sprite\n", -1);
 	if (gm->space == NULL)
 		clear_game(gm, "Error: coudn't load space sprite\n", -1);
-	if (gm->space == NULL)
+	if (gm->door[0] == NULL || gm->door[1] == NULL)
 		clear_game(gm, "Error: coudn't load door sprite\n", -1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:05:35 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/03 15:06:43 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/04 20:22:41 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	validate_move(t_game_manager *gm, int x, int y)
 			return (0);
 	return (1);
 }
-
+#include "stdio.h"
 void	move_enemy(t_game_manager *gm)
 {
 	int		i;
@@ -53,9 +53,10 @@ void	move_enemy(t_game_manager *gm)
 	{
 		new_pos = gm->enemies[i].pos;
 		if (gm->enemies[i].delay <= 0)
-			gm->enemies[i].delay = (rand() % 10) + 3;
-		else
+		{
+			gm->enemies[i].delay = (rand() % 8) + 6;
 			rand_enemy_dir(gm);
+		}
 		if (gm->enemies[i].dir == UP)
 			new_pos.y -= 1;
 		else if (gm->enemies[i].dir == DOWN)
@@ -67,7 +68,8 @@ void	move_enemy(t_game_manager *gm)
 		if (validate_move(gm, new_pos.x, new_pos.y) == 1)
 			gm->enemies[i].pos = new_pos;
 		else
-			gm->enemies[i].delay = (rand() % 12) + 4;
+			gm->enemies[i].delay = 0;
+		printf("%d\n",gm->enemies[i].delay);
 		gm->enemies[i].delay--;
 	}
 }

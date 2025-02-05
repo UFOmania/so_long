@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:23:08 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/03 15:04:25 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:12:46 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_game_manager
 	int		player_frame;
 	int		enemy_frame;
 	void	*space;
-	void	*door;
+	void	*door[2];
 	void	*wall;
 	void	*coin;
 	t_vec2	p_pos;

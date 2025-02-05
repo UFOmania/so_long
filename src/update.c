@@ -6,27 +6,35 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 20:49:21 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/22 10:15:23 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:22:41 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	draw_static_img(t_game_manager *gm, char sprite, int x, int y)
+static void	put_img(t_game_manager *gm, void *img, int x, int y)
+{
+	mlx_put_image_to_window(gm->mlx, gm->win, img, x, y);
+}
+
+static void	draw_static_img(t_game_manager *gm, char sprite, int x, int y)
 {
 	if (sprite == '1')
-		mlx_put_image_to_window(gm->mlx, gm->win, gm->wall, x * 32, y * 32);
+		put_img(gm, gm->wall, x * 32, y * 32);
 	else if (sprite == 'c')
 	{
-		mlx_put_image_to_window(gm->mlx, gm->win, gm->space, x * 32, y * 32);
-		mlx_put_image_to_window(gm->mlx, gm->win, gm->coin, x * 32, y * 32);
+		put_img(gm, gm->space, x * 32, y * 32);
+		put_img(gm, gm->coin, x * 32, y * 32);
 	}
 	else if (sprite == 's')
-		mlx_put_image_to_window(gm->mlx, gm->win, gm->space, x * 32, y * 32);
+		put_img(gm, gm->space, x * 32, y * 32);
 	else if (sprite == 'e')
 	{
-		mlx_put_image_to_window(gm->mlx, gm->win, gm->space, x * 32, y * 32);
-		mlx_put_image_to_window(gm->mlx, gm->win, gm->door, x * 32, y * 32);
+		put_img(gm, gm->space, x * 32, y * 32);
+		if (gm->door_open)
+			put_img(gm, gm->door[1], x * 32, y * 32);
+		else
+			put_img(gm, gm->door[0], x * 32, y * 32);
 	}
 }
 
