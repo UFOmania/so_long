@@ -6,22 +6,16 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:50:49 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/04 15:19:36 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:03:54 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long_bonus.h"
 
-static	void	clear_images(t_game_manager *gm)
+static void	clear_player_sprites(t_game_manager *gm)
 {
 	int	i;
 
-	if (gm->coin)
-		mlx_destroy_image(gm->mlx, gm->coin);
-	if (gm->door[0])
-		mlx_destroy_image(gm->mlx, gm->door[0]);
-	if (gm->door[1])
-		mlx_destroy_image(gm->mlx, gm->door[1]);
 	i = -1;
 	while (++i < SPRITE_COUNT)
 	{
@@ -36,6 +30,17 @@ static	void	clear_images(t_game_manager *gm)
 		if (gm->enemy[i])
 			mlx_destroy_image(gm->mlx, gm->enemy[i]);
 	}
+}
+
+static void	clear_images(t_game_manager *gm)
+{
+	clear_player_sprites(gm);
+	if (gm->coin)
+		mlx_destroy_image(gm->mlx, gm->coin);
+	if (gm->door[0])
+		mlx_destroy_image(gm->mlx, gm->door[0]);
+	if (gm->door[1])
+		mlx_destroy_image(gm->mlx, gm->door[1]);
 	if (gm->wall)
 		mlx_destroy_image(gm->mlx, gm->wall);
 	if (gm->space)
