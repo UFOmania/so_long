@@ -6,12 +6,11 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:05:35 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/05 15:12:59 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:29:10 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long_bonus.h"
-#include <stdio.h>
 
 static void	rand_enemy_dir(t_game_manager *gm, int i)
 {
@@ -23,10 +22,9 @@ static void	rand_enemy_dir(t_game_manager *gm, int i)
 	if (dir > 4)
 		dir = 1;
 	gm->enemies[i].dir = dir;
-
 }
 
-static int	validate_move(t_game_manager *gm,  int x, int y)
+static int	validate_move(t_game_manager *gm, int x, int y)
 {
 	int	i;
 
@@ -39,7 +37,7 @@ static int	validate_move(t_game_manager *gm,  int x, int y)
 	return (1);
 }
 
-static void rand_enemy_delay_dir(t_game_manager *gm, int i)
+static void	rand_enemy_delay_dir(t_game_manager *gm, int i)
 {
 	if (gm->enemies[i].delay <= 0)
 	{

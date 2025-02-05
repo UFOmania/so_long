@@ -6,13 +6,11 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:16:54 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/04 15:13:37 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:28:19 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sprite.h"
-
-#include <stdio.h>
 
 static void	sprites_load_player_r_l(t_game_manager *gm)
 {
