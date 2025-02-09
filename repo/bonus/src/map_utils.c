@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:30:39 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/08 21:06:55 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:32:34 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,18 @@ void	map_calculate_height(t_game_manager *gm, char *name)
 	if (fd == -1)
 		(ft_putendl_fd("Error: couldn't open the map\n", 2), exit(-1));
 	line = get_next_line(fd);
+	if (ft_strlen(line) > MAX_WIDTH)
+		clear_game(gm, "Error: map is too wide", -1);
 	while (line)
 	{
 		gm->m_height++;
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (gm->m_height > MAX_HEIGHT)
+		clear_game(gm, "Error: map is too long\n", -1);
+	else if (gm->m_height < 3)
+		clear_game(gm, "Error: map is too short\n", -1);
 	close(fd);
 }
 
@@ -36,7 +42,7 @@ static void	enemy_create(t_game_manager *gm, int x, int y, int size)
 
 	if (gm->enemies == NULL)
 	{
-		gm->enemies = malloc(sizeof(t_enemy) * size + 1);
+		gm->enemies = malloc(sizeof(t_enemy) * (size + 1));
 		if (gm->enemies == NULL)
 			clear_game(gm, "Error: coudnt allocate mem for enemies list\n", -1);
 		i = -1;
@@ -65,14 +71,4 @@ void	enemy_generate_list(t_game_manager *gm, int size)
 				enemy_create(gm, x, y, size);
 		}
 	}
-}
-
-void	map_validate_dimensions(t_game_manager *gm)
-{
-	if (gm->m_height < 3)
-		clear_game(gm, "Error: map is too short\n", -1);
-	if (gm->m_height > MAX_HEIGHT)
-		clear_game(gm, "Error: map is too long\n", -1);
-	if (gm->m_width > MAX_WIDTH)
-		clear_game(gm, "Error: map is too wide\n", -1);
 }

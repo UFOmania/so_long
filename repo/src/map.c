@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:47:12 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/08 21:14:16 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:25:51 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	map_load(t_game_manager *gm, char *name)
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
 		(ft_putendl_fd("Error: couldn't open the map 2 timme\n", 2), exit(-1));
-	gm->map = malloc(sizeof(char *) * gm->m_height);
+	gm->map = malloc(sizeof(char *) * (gm->m_height + 1));
 	if (!gm->map)
 		(strerror(errno), close(fd), exit(-1));
 	line = get_next_line(fd);

@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:47:12 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/08 21:03:21 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:32:42 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ void	init_map(t_game_manager *gm, char *name)
 
 	elements = (t_elements){0};
 	map_load(gm, name);
-	map_validate_dimensions(gm);
 	map_validate_shape(gm);
 	map_elements_count(gm, &elements);
 	if (elements.p_count != 1 || elements.c_count == 0 \

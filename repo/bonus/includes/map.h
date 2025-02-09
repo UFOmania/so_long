@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:32:20 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/08 21:13:55 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:32:54 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ typedef struct s_celements
 
 void	map_calculate_height(t_game_manager *gm, char *name);
 void	enemy_generate_list(t_game_manager *gm, int size);
-void	map_validate_dimensions(t_game_manager *gm);
 
 #endif
