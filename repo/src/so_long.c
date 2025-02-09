@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:32:02 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/08 21:14:31 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/09 08:26:53 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static int	read_inputs(int key_code, t_game_manager *gm)
 {
-	if (key_code == 13)
+	if (key_code == 13 || key_code == 126)
 		gm->move_dir = 1;
-	else if (key_code == 2)
+	else if (key_code == 2 || key_code == 124)
 		gm->move_dir = 2;
-	else if (key_code == 1)
+	else if (key_code == 1 || key_code == 125)
 		gm->move_dir = 3;
-	else if (key_code == 0)
+	else if (key_code == 0 || key_code == 123)
 		gm->move_dir = 4;
 	else if (key_code == 53)
 		close_game_event(gm);
