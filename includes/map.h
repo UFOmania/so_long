@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:32:20 by massrayb          #+#    #+#             */
-/*   Updated: 2025/01/22 09:57:11 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/15 11:59:44 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include "so_long.h"
 
+# define MAX_WIDTH 81
+# define MAX_HEIGHT 44
+
 void	map_calculate_height(t_game_manager *gm, char *name);
+void	map_validate_dimensions(t_game_manager *gm);
 
 #endif

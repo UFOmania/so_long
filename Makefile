@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 AR = ar rcs
 RM = rm -f
 
@@ -7,31 +7,30 @@ LIBFT = _libft/libft.a
 GNL = _gnl/gnl.a
 
 SRC_PATH = src
-SRC_PATH = bonus/src
+SRCB_PATH = bonus/src
 
-SRC = 	src/so_long.c\
-		src/map.c\
-		src/map_utils.c\
-		src/update.c\
-		src/sprite.c\
-		src/move.c\
-		src/clear.c\
+SRC = 	$(SRC_PATH)/so_long.c\
+		$(SRC_PATH)/map.c\
+		$(SRC_PATH)/map_utils.c\
+		$(SRC_PATH)/update.c\
+		$(SRC_PATH)/sprite.c\
+		$(SRC_PATH)/move.c\
+		$(SRC_PATH)/clear.c\
 
-SRCB = 	bonus/src/so_long_bonus.c\
-		bonus/src/map.c\
-		bonus/src/map_utils.c\
-		bonus/src/update.c\
-		bonus/src/sprite.c\
-		bonus/src/sprite_utils.c\
-		bonus/src/move.c\
-		bonus/src/clear.c\
-		bonus/src/enemy.c\
+SRCB = 	$(SRCB_PATH)/so_long_bonus.c\
+		$(SRCB_PATH)/map.c\
+		$(SRCB_PATH)/map_utils.c\
+		$(SRCB_PATH)/update.c\
+		$(SRCB_PATH)/sprite.c\
+		$(SRCB_PATH)/sprite_utils.c\
+		$(SRCB_PATH)/move.c\
+		$(SRCB_PATH)/clear.c\
+		$(SRCB_PATH)/enemy.c\
 		
 OBJ = $(SRC:.c=.o)
-
 OBJB = $(SRCB:.c=.o)
 
-NAME= so_long
+NAME = so_long
 NAMEB = so_long_bonus
 
 all: libft gnl $(NAME)
@@ -45,23 +44,25 @@ gnl:
 	make -C _gnl/
 
 $(NAME): $(OBJ)
-	$(CC) $(GNL) $(LIBFT) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(GNL) $(LIBFT) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(NAMEB):  $(OBJB)
-	$(CC) $(GNL) $(LIBFT) $(OBJB) -lmlx -framework OpenGL -framework AppKit -o $(NAMEB) 
+	$(CC) $(CFLAGS) $(GNL) $(LIBFT) $(OBJB) -lmlx -framework OpenGL -framework AppKit -o $(NAMEB) 
 
-$(SRC_PATH)/%.o: %.c includes/so_long.h
-	$(CC) $(CFLAGS) -c $<
+$(SRC_PATH)/%.o: $(SRC_PATH)/%.c includes/so_long.h includes/map.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(SRCB_PATH)/%.o: %.c bonus/includes/so_long_bonus.h
-	$(CC) $(CFLAGS) -c $<
+$(SRCB_PATH)/%.o: $(SRCB_PATH)/%.c bonus/includes/so_long_bonus.h bonus/includes/map.h  bonus/includes/sprite.h
+	$(CC) $(CFLAGS) -c $< -o $@
 	
 clean:
 	make clean -C _libft
 	make clean -C _gnl
 	$(RM) $(OBJ) $(OBJB)
 
+fclean: clean
+	$(RM) $(NAME) $(NAMEB)
+
 re: fclean all
 
-fclean: clean
-	$(RM) $(NAME) $(NAMEB) $(GNL) $(LIBFT)
+.PHONY: libft gnl clean

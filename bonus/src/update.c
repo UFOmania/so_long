@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 20:49:21 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/04 15:24:33 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:14:22 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ int	update(t_game_manager *gm)
 	if (!gm->door_open && gm->collected_coins == gm->coins_count)
 		gm->door_open = 1;
 	moves_counter = ft_itoa(gm->moves_counter);
-	mlx_string_put(gm->mlx, gm->win, 100, 100, 255, moves_counter);
+	if (moves_counter)
+		mlx_string_put(gm->mlx, gm->win, 2, 2, 3800852, moves_counter);
 	free(moves_counter);
 	return (0);
 }

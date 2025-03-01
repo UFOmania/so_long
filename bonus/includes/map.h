@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:32:20 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/03 15:02:46 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:16:47 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define MAP_H
 
 # include "so_long_bonus.h"
+
+# define MAX_WIDTH 81
+# define MAX_HEIGHT 44
 
 typedef struct s_celements
 {
@@ -27,5 +30,6 @@ typedef struct s_celements
 
 void	map_calculate_height(t_game_manager *gm, char *name);
 void	enemy_generate_list(t_game_manager *gm, int size);
+void	map_validate_dimensions(t_game_manager *gm);
 
 #endif

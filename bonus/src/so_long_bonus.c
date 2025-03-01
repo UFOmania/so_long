@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:23:47 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/03 15:11:18 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/09 08:25:17 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 static int	read_inputs(int key_code, t_game_manager *gm)
 {
-	if (key_code == 126)
+	if (key_code == 126 || key_code == 13)
 	{
 		gm->move_dir = UP;
 		gm->anim_dir = UP;
 	}
-	else if (key_code == 124)
+	else if (key_code == 124 || key_code == 2)
 	{
 		gm->move_dir = RIGHT;
 		gm->anim_dir = RIGHT;
 	}
-	else if (key_code == 125)
+	else if (key_code == 125 || key_code == 1)
 	{
 		gm->move_dir = DOWN;
 		gm->anim_dir = DOWN;
 	}
-	else if (key_code == 123)
+	else if (key_code == 123 || key_code == 0)
 	{
 		gm->move_dir = LEFT;
 		gm->anim_dir = LEFT;
@@ -50,11 +50,6 @@ static void	init_game(t_game_manager *gm)
 		clear_game(gm, "Error: problem with mlx_new_window()\n", -1);
 }
 
-void	f(void)
-{
-	system("leaks so_long");
-}
-
 static void	map_validate_name(char *name)
 {
 	char	*dot;
@@ -70,7 +65,6 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_putendl_fd("Error: please enter map.ber path only", 2), 1);
-	atexit(f);
 	gm = (t_game_manager){0};
 	map_validate_name(av[1]);
 	init_map(&gm, av[1]);

@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:47:12 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/03 15:10:00 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:28:52 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	map_load(t_game_manager *gm, char *name)
 		(ft_putendl_fd("Error: couldn't open the map 2 timme\n", 2), exit(-1));
 	gm->map = malloc(sizeof(char *) * (gm->m_height + 1));
 	if (!gm->map)
-		(strerror(errno), close(fd), exit(-1));
+		(ft_putendl_fd(strerror(errno), 2), close(fd), exit(-1));
 	line = get_next_line(fd);
 	gm->map[i++] = ft_strtrim(line, "\n");
 	free(line);
@@ -45,8 +45,6 @@ static void	map_validate_shape(t_game_manager *gm)
 	int	j;
 	int	size;
 
-	if (gm->m_height < 3)
-		clear_game(gm, "Error: map is too short\n", -1);
 	gm->m_width = ft_strlen(gm->map[0]);
 	i = -1;
 	while (++i < gm->m_height)
@@ -124,6 +122,7 @@ void	init_map(t_game_manager *gm, char *name)
 
 	elements = (t_elements){0};
 	map_load(gm, name);
+	map_validate_dimensions(gm);
 	map_validate_shape(gm);
 	map_elements_count(gm, &elements);
 	if (elements.p_count != 1 || elements.c_count == 0 \

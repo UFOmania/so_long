@@ -18,7 +18,6 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -c $<
 	
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(NAME)
 
-fclean: clean
-	$(RM) $(NAME)
+re: clean all

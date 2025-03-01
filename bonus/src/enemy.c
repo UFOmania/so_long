@@ -6,7 +6,7 @@
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:05:35 by massrayb          #+#    #+#             */
-/*   Updated: 2025/02/05 15:29:10 by massrayb         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:23:25 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	rand_enemy_delay_dir(t_game_manager *gm, int i)
 {
 	if (gm->enemies[i].delay <= 0)
 	{
-		gm->enemies[i].delay = (rand() % 8) + 6;
+		gm->enemies[i].delay = (rand() % 8) + 2;
 		rand_enemy_dir(gm, i);
 	}
 }
